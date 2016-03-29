@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 var Model = {
-  name: 'test@test.com',
+  email: 'test@test.com',
   isSoftphone: true,
   isActionInProgress: false,
 
-  onCompleteTransferClicked: function(e) {
-    console.log('onCompleteTransferClicked', e);
-    alert('Complete Transfer [' + this.name + ']');
+  completeTransfer: function(e) {
+    console.log('completeTransfer', e);
+    alert('Complete Transfer [' + this.email + ']');
   },
-  onCancelTransferClicked: function(e) {
-    console.log('onCancelTransferClicked', e);
-    alert('Cancel Transfer [' + this.name + ']');
+  cancelTransfer: function(e) {
+    console.log('cancelTransfer', e);
+    alert('Cancel Transfer [' + this.email + ']');
   }
 };
 
@@ -25,7 +25,7 @@ var KeypadPanel = React.createClass({
     this.setState({'showKeypad': !this.state.showKeypad});
   },
   render: function() {
-var model = this.props.model;
+var data = this.props.model;
     return (
 <div>
   <div className="row">
@@ -47,12 +47,12 @@ var CallControlsWarmTransfer = React.createClass({
   componentDidMount: function() {},
   componentWillUnmount: function() {},
   render: function() {
-var model = this.props.model;
+var data = this.props.model;
   return (
 <div>
   <div className="row group-separator-container">
     <div className="group-separator-title">
-      <span>{model.name}</span>
+      <span>{data.email}</span>
     </div>
   </div>
   <hr />
@@ -61,15 +61,15 @@ var model = this.props.model;
       <span>Warm Transfer</span>
     </div>
   </div>
-  <If condition={model.isSoftphone}>
-    <KeypadPanel model={model} />
+  <If condition={data.isSoftphone}>
+    <KeypadPanel model={data} />
   </If>
   <div className="row">
 {/* commented out */}
-    <button onClick={model.onCompleteTransferClicked.bind(model)}>Complete Transfer</button>
+    <button onClick={data.completeTransfer.bind(data)}>Complete Transfer</button>
   </div>
   <div className="row">
-    <button onClick={model.onCancelTransferClicked.bind(model)}>Cancel Transfer</button>
+    <button onClick={data.cancelTransfer.bind(data)}>Cancel Transfer</button>
   </div>
 </div>
     );
